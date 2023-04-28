@@ -107,7 +107,7 @@
 							<!-- <h2>We Are Getting Married</h2> -->
 							
 							<div class="simply-countdown simply-countdown-one"></div>
-							<p><a href="#" class="btn btn-default btn-sm">Save the date</a></p>
+							<p><a target="_blank" href="https://calendar.google.com/calendar/u/0/r/eventedit?text=Undangan pernikahan Alba dan Ghazi&dates=20230506T080000/20230506T130000&details=Udangan pernikahan alba dan ghazi&location=JL. RA. Fadillah No.9, RW.5, Cijantung, Kec. Ps Rebo, Kota Jakarta Timur" class="btn btn-default btn-sm">Save the date</a></p>
 						</div>
 					</div>
 				</div>
@@ -131,7 +131,7 @@
 					<hr>
 					<h2>InsyaAllah kami akan akan menikahkan anak kami pada</h2>
 					<h3>06 Mei 2022</h3>
-					<p>Maka dengan itu kami mengundang Bapak/Ibu <b>Fulan Dynamic</b> untuk hadir diacara pernikahan anak kami</p>
+					<p>Maka dengan itu kami mengundang Bapak/Ibu <b id="tamu_undangan">Fulan Dynamic</b> untuk hadir diacara pernikahan anak kami</p>
 				</div>
 			</div>
 			<div class="couple-wrap animate-box">
@@ -457,7 +457,7 @@
 						
 						
 						<div class="col-md-4 col-sm-4">
-							<button type="submit" class="btn btn-default btn-block">Kirim pesan</button>
+							<button id="kirim_pesan" type="submit" class="btn btn-default btn-block">Kirim pesan</button>
 						</div>
 					</form>
 				</div>
@@ -512,8 +512,36 @@
         day: d.getDate(),
         enableUtc: false
     });
+
+
+	// get parameter for tamu undangan
+	const queryString = window.location.search
+	const urlParams = new URLSearchParams(queryString)
+	const tamu_undangan = urlParams.get('tamu')
+
+	// get node
+	node_tamu_undangan = document.getElementById("tamu_undangan")
+	node_tamu_undangan.innerHTML = tamu_undangan
+
+
+
+
+
+
+	// kirim pesan undangan
+	node_name = document.getElementById("name")
+	node_message = document.getElementById("message")
+	node_button_kirim_pesan = document.getElementById("kirim_pesan")
+
+
+	node_button_kirim_pesan.addEventListener("click", function(e){
+		e.preventDefault()
+		var message  = encodeURIComponent(node_message.value)
+		var url = "https://wa.me/6281932039600?text="+message
+		console.log(url)
+		window.open(url, '_blank').focus()
+	})
 </script>
 
 	</body>
 </html>
-
